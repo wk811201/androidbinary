@@ -10,7 +10,7 @@ import (
 	"path/filepath"
 	"strconv"
 
-	"github.com/shogo82148/androidbinary"
+	"github.com/wk811201/androidbinary"
 
 	"github.com/chai2010/webp"
 	_ "image/jpeg" // handle jpeg format
