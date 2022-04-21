@@ -7,10 +7,12 @@ import (
 	"image"
 	"io"
 	"os"
+	"path/filepath"
 	"strconv"
 
 	"github.com/shogo82148/androidbinary"
 
+	"github.com/chai2010/webp"
 	_ "image/jpeg" // handle jpeg format
 	_ "image/png"  // handle png format
 )
@@ -84,6 +86,10 @@ func (k *Apk) Icon(resConfig *androidbinary.ResTableConfig) (image.Image, error)
 	imgData, err := k.readZipFile(iconPath)
 	if err != nil {
 		return nil, err
+	}
+	if filepath.Ext(iconPath) == ".webp" {
+		m, err := webp.Decode(bytes.NewReader(imgData))
+		return m, err
 	}
 	m, _, err := image.Decode(bytes.NewReader(imgData))
 	return m, err
