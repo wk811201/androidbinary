@@ -12,7 +12,7 @@ import (
 
 	"github.com/wk811201/androidbinary"
 
-	"github.com/harukasan/go-libwebp/webp"
+	"github.com/chai2010/webp"
 	_ "image/jpeg" // handle jpeg format
 	_ "image/png"  // handle png format
 )
@@ -88,11 +88,7 @@ func (k *Apk) Icon(resConfig *androidbinary.ResTableConfig) (image.Image, error)
 		return nil, err
 	}
 	if filepath.Ext(iconPath) == ".webp" {
-
-		options := &webp.DecoderOptions{}
-		m, err := webp.DecodeRGBA(imgData, options)
-
-		//m, err := webp.Decode(bytes.NewReader(imgData))
+		m, err := webp.Decode(bytes.NewReader(imgData))
 		return m, err
 	}
 	m, _, err := image.Decode(bytes.NewReader(imgData))
